@@ -4,13 +4,13 @@ import { useState, useEffect } from "react";
 import { addOffsetToTime } from "/utils/timeHelper";
 import { monthlyJamaatOffsets } from "/data/jamatOffset";
 
-export default function PrayerCircles({ todaysData }) {
+export default function PrayerCircles({ todaysData } : { todaysData: any }) {
   const [currentTime, setCurrentTime] = useState(new Date());
   const [month] = useState(currentTime.getMonth() + 1);
   const jamaatOffsetsForThisMonth = monthlyJamaatOffsets[month];
 
   // ✅ 1. Identify the NEXT upcoming Jama’at
-  const [nextPrayer, setNextPrayer] = useState(null);
+  const [nextPrayer, setNextPrayer] = useState<string | null>(null);
 
   const prayers = [
     { 

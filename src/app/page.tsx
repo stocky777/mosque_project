@@ -14,7 +14,7 @@ export default function Home() {
   const [year, setYear] = useState(currentTime.getFullYear()); //usestate takes the year from current time
   const [month, setMonth] = useState(currentTime.getMonth() + 1); //usestate takes the month from current time (+1 because months are 0-indexed) for eg. october is 9 so that plus 1 makes it 10
   const [apiUrl, setApiUrl] = useState(`https://api.aladhan.com/v1/calendarByCity/${year}/${month}?city=Dundee&country=GB&method=3&timezonestring=Europe/London&school=1`); //api url with year and month variables
-  const [todaysData, setTodaysData] = useState(null); //state to store today's data
+  const [todaysData, setTodaysData] = useState<any>(null); //state to store today's data
   const [loading , setLoading] = useState(true); //state to track loading status
   //const jamaatOffsetsForThisMonth = monthlyJamaatOffsets[month];
   //useEffect to fetch data from api
@@ -37,11 +37,11 @@ export default function Home() {
         const todayDateFormatted = currentTime.toLocaleDateString('en-GB').replace(/\//g, '-');
         console.log("Today's date formatted:", todayDateFormatted);
         console.log("looking for today's data...", currentTime);
-        const todayData = result.data.find(day => day.date.gregorian.date === todayDateFormatted);
+        const todayData = result.data.find((day: any) => day.date.gregorian.date === todayDateFormatted);
         console.log("Today's data found:", todayData);
         setTodaysData(todayData);
         console.log("Today's Fajr time:", todayData.timings);
-      } catch (error) {
+      } catch (error:any) {
         console.error("Error fetching data:", error);
         setError(error.message);
       } finally {
@@ -55,6 +55,9 @@ export default function Home() {
   }
   if (error) {
     return <div>Error: {error}</div>;
+  }
+  if (!todaysData) {
+    return null;
   }
   
 
