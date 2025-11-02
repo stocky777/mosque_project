@@ -3,6 +3,9 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 import LoadingSpinner from "@/components/LoadingSpinner";
 import PrayerCircles from "@/components/PrayerCircles";
+import MainTime from "@/components/time";
+import NextJamatName from "@/components/nextJamatName";
+import HadithOverlay from "@/components/hadithOverlay";
 //import { monthlyJamaatOffsets } from "/data/jamatOffset.tsx"
 export default function Home() {
   // State variables
@@ -59,6 +62,7 @@ export default function Home() {
 
   return (
     <main className="flex w-full h-full flex-col items-center justify-between">
+      <HadithOverlay/>
       {/* Header */}
       <section className="relative">
         <div className="relative backdrop-blur-sm m-5 p-5 w-auto scale-350 rounded-full border-8 shadow-2xl border-amber-200 shadow-amber-300">
@@ -71,7 +75,12 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="w-full bg-amber-400 mt-20">
+
+      <section className="relative w-full p-12 text-center mt-12">
+        <MainTime currentTime={currentTime}/>
+      </section>
+
+      <section className="w-full h-full mt-20">
           <PrayerCircles todaysData={todaysData} />
       </section>
 
