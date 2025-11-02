@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import LoadingSpinner from "@/components/LoadingSpinner";
 import PrayerCircles from "@/components/PrayerCircles";
 import MainTime from "@/components/time";
-import NextJamatName from "@/components/nextJamatName";
 import HadithOverlay from "@/components/hadithOverlay";
 //import { monthlyJamaatOffsets } from "/data/jamatOffset.tsx"
 export default function Home() {
