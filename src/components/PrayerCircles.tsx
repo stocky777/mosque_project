@@ -114,7 +114,7 @@ export default function PrayerCircles({ todaysData }) {
 
             {prayer.jamaatTime && (
               <>
-                <div className="prayer-label text-xs opacity-90 uppercase tracking-wider">Jama'at</div>
+                <div className="prayer-label text-xs opacity-90 uppercase tracking-wider">Jama&apos;at</div>
                 <div className="prayer-time font-bold text-lg">{prayer.jamaatTime}</div>
               </>
             )}
