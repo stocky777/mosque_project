@@ -4,10 +4,11 @@ import { useState, useEffect } from "react";
 import { addOffsetToTime } from "/utils/timeHelper";
 import { monthlyJamaatOffsets } from "/data/jamatOffset";
 
-export default function PrayerCircles({ todaysData } : { todaysData: any }) {
+export default function PrayerCircles({ todaysData } : { todaysData: unknown }) {
   const [currentTime, setCurrentTime] = useState(new Date());
   const [month] = useState(currentTime.getMonth() + 1);
   const jamaatOffsetsForThisMonth = monthlyJamaatOffsets[month];
+  const data = todaysData as {timings: Record<string, string>}; // Type assertion
 
   // ✅ 1. Identify the NEXT upcoming Jama’at
   const [nextPrayer, setNextPrayer] = useState<string | null>(null);
@@ -16,43 +17,43 @@ export default function PrayerCircles({ todaysData } : { todaysData: any }) {
     { 
       name: 'FAJR', 
       position: 'top-[5%] left-[5%]',
-      startTime: todaysData.timings.Fajr.split(' ')[0],
-      jamaatTime: addOffsetToTime(todaysData.timings.Fajr.split(' ')[0], jamaatOffsetsForThisMonth.Fajr)
+      startTime: data.timings.Fajr.split(' ')[0],
+      jamaatTime: addOffsetToTime(data.timings.Fajr.split(' ')[0], jamaatOffsetsForThisMonth.Fajr)
     },
     { 
       name: 'DHUHR', 
       position: 'top-[50%] left-[25%]',
-      startTime: todaysData.timings.Dhuhr.split(' ')[0],
-      jamaatTime: addOffsetToTime(todaysData.timings.Dhuhr.split(' ')[0], jamaatOffsetsForThisMonth.Dhuhr)
+      startTime: data.timings.Dhuhr.split(' ')[0],
+      jamaatTime: addOffsetToTime(data.timings.Dhuhr.split(' ')[0], jamaatOffsetsForThisMonth.Dhuhr)
     },
     { 
       name: 'ASR', 
       position: 'top-[50%] left-1/2 transform -translate-x-1/2',
-      startTime: todaysData.timings.Asr.split(' ')[0],
-      jamaatTime: addOffsetToTime(todaysData.timings.Asr.split(' ')[0], jamaatOffsetsForThisMonth.Asr)
+      startTime: data.timings.Asr.split(' ')[0],
+      jamaatTime: addOffsetToTime(data.timings.Asr.split(' ')[0], jamaatOffsetsForThisMonth.Asr)
     },
     { 
       name: 'MAGHRIB', 
       position: 'top-[50%] right-[25%]',
-      startTime: todaysData.timings.Maghrib.split(' ')[0],
-      jamaatTime: addOffsetToTime(todaysData.timings.Maghrib.split(' ')[0], jamaatOffsetsForThisMonth.Maghrib)
+      startTime: data.timings.Maghrib.split(' ')[0],
+      jamaatTime: addOffsetToTime(data.timings.Maghrib.split(' ')[0], jamaatOffsetsForThisMonth.Maghrib)
     },
     { 
       name: 'ISHA', 
       position: 'top-[5%] right-[5%]',
-      startTime: todaysData.timings.Isha.split(' ')[0],
-      jamaatTime: addOffsetToTime(todaysData.timings.Isha.split(' ')[0], jamaatOffsetsForThisMonth.Isha)
+      startTime: data.timings.Isha.split(' ')[0],
+      jamaatTime: addOffsetToTime(data.timings.Isha.split(' ')[0], jamaatOffsetsForThisMonth.Isha)
     },
     {
       name: 'Sunrise',
       position: 'bottom-1 left-1',
-      startTime: todaysData.timings.Sunrise.split(' ')[0],
+      startTime: data.timings.Sunrise.split(' ')[0],
       Icon: <FiSunrise/>
     },
     {
       name: 'Sunset',
       position: 'bottom-1 right-1',
-      startTime: todaysData.timings.Sunset.split(' ')[0],
+      startTime: data.timings.Sunset.split(' ')[0],
       Icon: <FiSunset/>
     }
   ];
